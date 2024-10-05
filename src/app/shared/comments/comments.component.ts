@@ -7,6 +7,7 @@ import { CommentService } from '../../services/comment.service';
 import { Subscription } from 'rxjs';
 import { EditorModule } from 'primeng/editor';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -33,7 +34,9 @@ export class CommentsComponent {
     commentText: new FormControl(null,[Validators.required, Validators.maxLength(1500)])
   })
 
-  constructor(private commentService: CommentService) {}
+  constructor(private commentService: CommentService,
+    private router: Router 
+  ) {}
 
   ngOnInit(): void {
     this.fetchComments(); 
@@ -46,7 +49,6 @@ export class CommentsComponent {
   fetchComments(): void {
     this.commentSubscription = this.commentService.getComments(this.postId).subscribe(
         (comments : UserComment[]) => {
-          console.log("comments", comments)
             this.comments = comments;
         },
         (error) => {
@@ -63,8 +65,6 @@ export class CommentsComponent {
   }
 
   onSubmit(): void {
-    console.log('Form valid:', this.form.valid);
-    console.log('Form value:', this.form.value);
     if (this.form.valid) {
       const newComment: PostComment = {
         id: 0,
@@ -87,6 +87,9 @@ export class CommentsComponent {
           this.selectedCommentId = null;
         },
         (error) => {
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
           console.error('Error submitting comment:', error);
         }
       );
@@ -95,7 +98,6 @@ export class CommentsComponent {
 
   toggleLike(comment: UserComment): void {
     const url = `${this.baseUrl}/CommentLikes/`;
-    console.log(comment.id)
     if (comment.likedByUser) {
         this.commentService.removeCommentLike(url + comment.id).subscribe(
             () => {
@@ -103,7 +105,7 @@ export class CommentsComponent {
                 comment.likedByUser = false;
             },
             (error) => {
-                console.error('Error removing like:', error);
+              console.log("error", error.status)
             }
         );
     } else {
@@ -117,5 +119,5 @@ export class CommentsComponent {
             }
         );
     }
-}
+  }
 }
