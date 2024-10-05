@@ -1,0 +1,104 @@
+.navbar {
+  padding: 1rem;
+  border-bottom: 1px solid var(--grey-line-color);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--dark-primary-color);
+    }
+  }
+
+  .nav {
+    display: flex;
+    list-style: none;
+
+    .nav-item {
+      margin-left: 1rem;
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+
+      .nav-link {
+        font-size: 1rem;
+        color: var(--grey-color); 
+        text-decoration: none;
+        cursor: pointer;
+        display: flex; 
+        align-items: center;
+
+        &:hover {
+          color: var(--primary-color);
+        }
+
+        &.active {
+          color: var(--primary-color);
+          font-weight: bold;
+        }
+      }
+    }
+
+    .nav-search {
+      width: 100%; 
+      max-width: 300px;
+      padding: 10px; 
+      border: 1px solid #ccc;
+      border-radius: 8px; 
+      font-size: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+      transition: border-color 0.3s ease;  
+    }
+
+    .nav-search:focus {
+      border-color: var(--primary-color); 
+      outline: none;
+    }
+    
+    .dropdown-menu {
+      position: absolute; 
+      top: 100%; 
+      left: 0; 
+      background-color: white; 
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+      border-radius: 0.25rem; 
+      z-index: 1000; 
+      margin: 0; 
+      padding: 0; 
+      list-style: none; 
+
+      li {
+        a {
+          display: block; 
+          padding: 0.5rem 1rem; 
+          color: var(--grey-color); 
+          text-decoration: none; 
+
+          &:hover {
+            background-color: var(--light-grey-color);
+            color: var(--primary-color);
+          }
+
+          &.active {
+            background-color: var(--light-grey-color);
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+  
+  .pull-xs-right {
+    margin-left: auto;
+  }
+}

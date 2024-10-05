@@ -1,0 +1,11 @@
+<div class="sidebar">
+  <p class="sidebar-title">Categories</p>
+  <button (click)="resetCategory()" class="reset-button">Reset</button>
+    <ul>
+        <li *ngFor="let category of categories" 
+        (click)="onCategoryClick(category.id!)"
+         [class.selected]="category.id === selectedCategoryId">
+            <a href="javascript:void(0)">{{ category.name }}</a>
+          </li>
+    </ul>
+  </div>

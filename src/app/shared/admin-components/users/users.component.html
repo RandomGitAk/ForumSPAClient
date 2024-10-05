@@ -1,0 +1,49 @@
+<div>
+    <div class="page-title"> 
+        <h2>Users</h2> 
+        <small> search by email</small>
+    </div>
+    <app-admin-table [data]="data" [columns]="columns" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-admin-table>
+
+     <!-- Paginator  -->
+     <p-paginator
+     [rows]="rows"
+     [totalRecords]="totalRecords"
+     [rowsPerPageOptions]="[5, 10, 20]"
+     (onPageChange)="onPageChange($event)"
+     #paginator
+     ></p-paginator>
+</div>
+
+<p-dialog *ngIf="selectedUser" header="Edit User" [modal]="true" [(visible)]="displayEditModal" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block">Update your information.</span>
+    <div class="field flex align-items-center gap-3 mb-3">
+        <label for="role" class="font-semibold w-6rem">Role</label>
+        <p-dropdown 
+            id="role" 
+            [options]="roles" 
+            [(ngModel)]="selectedRole" 
+            placeholder="Select a role"
+            optionLabel="name"
+            [style]="{ width: '100%' }" 
+            [showClear]="true" 
+        ></p-dropdown>
+    </div>
+    <div   class="field flex align-items-center gap-3 mb-3">
+        <label for="username" class="font-semibold w-6rem">First name</label>
+        <input  pInputText id="username" class="flex-auto" [(ngModel)]="selectedUser.firstName" autocomplete="off" readonly/>
+    </div>
+    <div class="field flex align-items-center gap-3 mb-3">
+        <label for="username" class="font-semibold w-6rem">Last name</label>
+        <input  pInputText id="username" class="flex-auto" [(ngModel)]="selectedUser.lastName" autocomplete="off" readonly/>
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">Email</label>
+        <input pInputText id="email" class="flex-auto" [(ngModel)]="selectedUser.email" autocomplete="off" readonly />
+    </div>
+
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancel" severity="secondary" (onClick)="displayEditModal = false" />
+        <p-button label="Save" (onClick)="saveUser()" />
+    </div>
+</p-dialog>

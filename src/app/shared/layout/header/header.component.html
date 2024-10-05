@@ -1,0 +1,95 @@
+<nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">forum</a>
+
+      <ul *ngIf="!isLoggedIn; else loggedInMenu"
+        class="nav pull-xs-right">
+
+        <li class="nav-item">
+          <a class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link"
+            routerLink="/login"
+            routerLinkActive="active">
+            Sign in
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link"
+            routerLink="/register"
+            routerLinkActive="active">
+            Sign up
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <input type="text" 
+          pInputText placeholder="Search" 
+          class="nav-search" 
+          [(ngModel)]="searchTerm"
+          (input)="onSearch()"/>
+        </li>
+  
+      </ul>
+  
+      <ng-template #loggedInMenu>
+        <ul
+          class="nav pull-xs-right">
+              
+          <li class="nav-item">
+            <input type="text" 
+            pInputText placeholder="Search" 
+            class="nav-search" 
+            [(ngModel)]="searchTerm"
+            (input)="onSearch()"/>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link"
+              routerLink="/"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              Home
+            </a>
+          </li>
+
+          <li class="nav-item" *ngIf="isAdminOrEditor()">
+            <a class="nav-link"
+              routerLink="/admin"
+              routerLinkActive="active">
+              Admin Page
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+              routerLink="/createPost"
+              routerLinkActive="active">
+              New Article
+            </a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link"
+              routerLink="/profile"
+              routerLinkActive="active">
+              {{ userEmail }}
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" (click)="onLogout()">Logout</a>
+          </li>
+    
+        </ul>
+       </ng-template>
+    </div>
+  </nav>

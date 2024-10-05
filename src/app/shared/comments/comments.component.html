@@ -1,0 +1,66 @@
+<div class="comments-section">
+    <div class="comments-header">
+        <span class="comments-count">{{ comments.length}} Answers</span>
+    </div>
+
+    <div class="comment-form" #commentForm>
+        <div class="comment-avatar">
+            <img src="{{user.image}}" alt="{{user.lastName}}">
+        </div>
+        <div class="comment-input">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <textarea placeholder=" {{selectedReplyTo  ? 'Reply to ' + selectedReplyTo.firstName + ' ' + selectedReplyTo.lastName + ': ' : 'Add comment'}}" rows="3" formControlName="commentText"></textarea>
+          
+                <div class="comment-info">
+                    <span>Allowed tags: blockquote, a, pre, code, ul, ol, li, b, i, del.</span>
+                    <button class="submit-comment-btn" type="submit" [disabled]="form.invalid">
+                        {{ selectedCommentId ? 'Reply to Comment' : 'Add a Comment' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="comments-list">
+        <div *ngFor="let comment of comments" class="comment-item">
+            <div class="comment-avatar">
+                <img [src]="comment.user.image" alt="{{comment.user.firstName}}">
+            </div>
+            <div class="comment-content">
+                <div class="comment-author">{{comment.user.firstName}} {{comment.user.lastName}}</div>
+                <div class="comment-text">{{comment.content}}</div>
+                <div class="comment-footer">
+                    <a href="#" class="reply-link" (click)="selectCommentForReply(comment); $event.preventDefault()" >Reply</a>
+                    {{ comment.countLikes }} 👍
+                    <a href="#" class="support-link" (click)="toggleLike(comment); $event.preventDefault()">
+                        <span *ngIf="!comment.likedByUser">Support</span>
+                        <span *ngIf="comment.likedByUser">Remove support</span>
+                    </a>
+                    <span class="comment-time">{{comment.commentDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+                </div>
+
+                <div class="replies" *ngIf="comment.replies.length > 0">
+                    <div *ngFor="let reply of comment.replies" class="reply-item">
+                        <div class="comment-avatar">
+                            <img [src]="reply.user.image" alt="{{reply.user.firstName}}">
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-author">{{reply.user.firstName}} {{reply.user.lastName}}</div>
+                            <div class="comment-text">{{reply.content}}</div>
+                            <div class="comment-footer">
+                                {{ reply.countLikes }} 👍
+                                <a href="#" class="support-link" (click)="toggleLike(reply); $event.preventDefault()">
+                              
+                                    <span *ngIf="!reply.likedByUser">Support</span>
+                                    <span *ngIf="reply.likedByUser">Remove support</span>
+                                </a>
+                                <span class="comment-time">{{reply.commentDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      
+            </div>
+        </div>
+    </div>
+</div>

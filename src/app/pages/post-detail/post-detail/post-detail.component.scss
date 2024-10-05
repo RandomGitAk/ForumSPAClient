@@ -1,0 +1,142 @@
+.page-container {
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding-top: 2rem;
+    margin-bottom: 20px;
+    
+    .page-row {
+      display: flex;
+      justify-content: space-between;
+      
+    }
+    .forum-card {
+        background-color: var(--light--color);
+        border: 1px solid var(--grey-line-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 0 auto;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .vote-scale {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 15px;
+    }
+
+    .vote-btn {
+        border: 1px solid var(--grey-color);
+        border-radius: 50%;
+        padding: 10px 13px;
+        margin: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        background-color: var( --light--color);
+        color: var(--dark-grey-color);
+    }
+
+    .vote-count {
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--dark-grey-color);
+    }
+
+    .vote-btn.upvote:hover,
+    .vote-btn.downvote:hover,
+    .vote-btn.active  {
+        background-color: var(--grey-line-color);
+    }
+
+    .vote-and-content {
+        display: flex;
+        align-items: flex-start;
+    }
+
+
+    .post-content {
+        flex: 1;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        color: var(--dark-grey-color);
+        margin-bottom: 15px;
+    }
+
+
+    .post-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .question-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .post-date {
+        font-size: 14px;
+        color: var( --grey-color);
+        margin-bottom: 15px;
+    }
+
+    .description {
+        font-size: 16px;
+        color: var(--dark-grey-color);
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .tags {
+        margin-top: 10px;
+    }
+
+    .tag {
+        display: inline-block;
+        background-color: #e1ecf4;
+        color: var(--primary-color);
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-name {
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-right: 10px;
+    }
+
+    .user-reputation {
+        color: var(--grey-color);
+    }
+
+    .timestamp {
+        color: var(--grey-color)
+    }
+
+    .card-comments{
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px dashed var(--primary-color);
+    }
+}

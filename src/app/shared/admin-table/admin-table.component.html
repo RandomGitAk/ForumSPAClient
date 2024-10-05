@@ -1,0 +1,33 @@
+<p-confirmDialog />
+<div class="create-button-container">
+  <button *ngIf="showCreateButton" class="create-button" (click)="onCreate()">Create</button>
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns">{{ col.header }}</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.field === 'role.name'; else defaultContent">
+            {{ item.role?.name }}
+          </ng-container>
+          <ng-template #defaultContent>
+            <ng-container *ngIf="col.field === 'user.firstName'; else otherContent">
+              {{ item.user?.firstName }}
+            </ng-container>
+            <ng-template #otherContent>
+              {{ item[col.field] | content: 80: '...' }}
+            </ng-template>
+          </ng-template>
+        </td>
+        <td>
+          <button *ngIf="showEditButton" class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+          <button class="btn btn-danger" (click)="onDelete(item)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

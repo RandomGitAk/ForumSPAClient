@@ -1,0 +1,24 @@
+<div class="forum-card">
+  <div class="card-header">
+    <span class="votes">{{post.countLikes}} votes</span>
+    <span class="answers">{{post.countComments}} answers</span>
+    <span class="views">{{ post.views }} views</span>
+  </div>
+  
+  <div class="card-body">
+    <h3 class="question-title">
+      <a [routerLink]="['/post', post.id]">{{ post.title }}</a>
+    </h3>
+    <p class="description" [froalaView]="truncatedContent"></p>
+    <div class="tags">
+      <span class="tag">{{post.categoryName}}</span>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="user-info">
+      <span class="user-name">{{post.user?.firstName}} {{post.user?.lastName}}</span>
+    </div>
+    <span class="timestamp">{{post.postedDate | postDate}}</span>
+  </div>
+</div>

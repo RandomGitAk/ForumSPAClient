@@ -1,0 +1,61 @@
+<div class="create-post-container">
+    <div class="feed-toggle">
+        <ul class="feed-nav">
+          <li class="feed-nav-item">
+            <a routerLink="/createPost" 
+             routerLinkActive="active" 
+             class="feed-nav-link">
+              Your Feed
+            </a>
+          </li>
+          <li class="feed-nav-item">
+            <a routerLink="/" 
+    
+            class="feed-nav-link">
+              Global Feed
+            </a>
+          </li>
+          <li class="feed-nav-item" >
+            <a class="feed-nav-link active">
+              <i class="ion-pound"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    <h2>Create a Post</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div>
+            <label for="title">Title:</label>
+            <input id="title" formControlName="title" required />
+        </div>
+        
+        <div>
+            <label for="content">Content:</label>
+            <textarea [froalaEditor] formControlName="content"></textarea>
+        </div>
+
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" formControlName="categoryId" required>
+                <option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                </option>
+            </select>
+        </div>
+
+        <button type="submit">Create</button>
+    </form>
+
+    <h3 class="post-title">Your Posts</h3>
+    <app-article-main *ngFor="let post of posts" [post]="post"></app-article-main>
+
+    <!-- Paginator  -->
+   <p-paginator
+   [rows]="rows"
+   [totalRecords]="totalRecords"
+   [rowsPerPageOptions]="[5, 10, 20]"
+   (onPageChange)="onPageChange($event)"
+   #paginator
+   ></p-paginator>
+</div>

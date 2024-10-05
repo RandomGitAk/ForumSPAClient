@@ -1,0 +1,78 @@
+<div class="overlay">
+    <div class="register-form">
+
+      <button class="close-button" (click)="closeRegister()">×</button>
+  
+      <h2>Register</h2>
+  
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" #registerForm="ngForm">
+                
+        <div *ngIf="serverErrorMessage" class="text-danger">
+          {{ serverErrorMessage }}
+        </div>
+        
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            formControlName="firstName"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div *ngIf="form.get('firstName')?.invalid && (form.get('firstName')?.touched || form.get('firstName')?.dirty)">
+            <small class="text-danger" *ngIf="form.get('firstName')?.errors?.['required']">First Name is required.</small>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            formControlName="lastName"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div *ngIf="form.get('lastName')?.invalid && (form.get('lastName')?.touched || form.get('lastName')?.dirty)">
+            <small class="text-danger" *ngIf="form.get('lastName')?.errors?.['required']">Last Name is required.</small>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            formControlName="email"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || form.get('email')?.dirty)">
+            <small class="text-danger" *ngIf="form.get('email')?.errors?.['required']">Email is required.</small>
+            <small class="text-danger" *ngIf="form.get('email')?.errors?.['invalidEmail']">Email must be at least 6 characters long and contain an  "&#64;".</small>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            formControlName="password"
+            type="password"
+            class="form-control"
+            required
+          />
+          <div *ngIf="form.get('password')?.invalid && (form.get('password')?.touched || form.get('password')?.dirty)">
+            <small class="text-danger" *ngIf="form.get('password')?.errors?.['required']">Password is required.</small>
+            <small class="text-danger" *ngIf="form.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+          </div>
+        </div>
+  
+        <button type="submit" class="register-button" [disabled]="!registerForm.form.valid">
+          Register
+        </button>
+
+        <div class="login-link">
+          <a routerLink="/login">Already have an account? Login here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  

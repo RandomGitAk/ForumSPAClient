@@ -1,0 +1,16 @@
+<div>
+    <div class="page-title"> 
+        <h2>Posts</h2> 
+        <small> search by name</small>
+    </div>
+    <app-admin-table [data]="data" [columns]="columns" [showEditButton]="false" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-admin-table>
+
+     <!-- Paginator  -->
+     <p-paginator
+     [rows]="rows"
+     [totalRecords]="totalRecords"
+     [rowsPerPageOptions]="[5, 10, 20]"
+     (onPageChange)="onPageChange($event)"
+     #paginator
+     ></p-paginator>
+</div>

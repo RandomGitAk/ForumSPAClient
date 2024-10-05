@@ -1,0 +1,47 @@
+<div *ngIf="post">
+    <div class="page-container">
+        <div class="page-row">
+    <div class="forum-card">
+        <div class="card-header">
+            <div class="vote-and-content">
+                <div class="vote-scale">
+                    <button class="vote-btn upvote" 
+                    [ngClass]="{'active': post.userReaction === 'Like'}" 
+                    [disabled]="post.userReaction === 'Like'" 
+                    (click)="onUpvote()">
+                        ▲
+                    </button>
+                    <span class="vote-count">{{post.countLikes}}</span>
+                    <button class="vote-btn downvote" 
+                    [ngClass]="{'active': post.userReaction === 'Dislike'}" 
+                    [disabled]="post.userReaction === 'Dislike'" 
+                    (click)="onDownvote()">
+                        ▼
+                    </button>
+                </div>
+                <div class="post-content">
+                    <h3 class="question-title">{{ post.title }}</h3>
+                    <p class="post-date">Asked {{post.postedDate | postDate}}</p>
+                    <p class="description" [froalaView]="post.content">
+                    </p>
+                    <div class="tags">
+                        <span class="tag">{{post.categoryName}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card-footer">
+            <div class="user-info">
+                <span class="user-name">{{ post.user?.firstName}} {{post.user?.lastName}}</span>
+            </div>
+            <span class="timestamp">{{ post.postedDate | date}}</span>
+        </div>
+
+        <div class="card-comments">
+            <app-comments [user]="post.user!" [postId]="post.id!" ></app-comments>
+        </div>
+    </div>
+    <app-category-list [categories]="categories"></app-category-list>
+</div>
+</div>

@@ -1,0 +1,51 @@
+<div class="home-page">
+    
+    <div class="banner" >
+      <div class="banner-container">
+        <h1 class="banner-logo">forum</h1>
+        <p class="banner-text">This forum is powered by Angular, delivering a smooth and dynamic user experience.</p>
+      </div>
+    </div>
+  
+    <div class="page-container">
+      <div class="page-row">
+  
+        <div class="main-content">
+          <div class="feed-toggle">
+            <ul class="feed-nav">
+              <li class="feed-nav-item">
+                <a routerLink="/createPost" routerLinkActive="active" class="feed-nav-link">
+                  Your Feed
+                </a>
+              </li>
+              <li class="feed-nav-item">
+                <a routerLink="/" 
+                routerLinkActive="active" class="feed-nav-link">
+                  Global Feed
+                </a>
+              </li>
+              <li class="feed-nav-item" >
+                <a class="feed-nav-link active">
+                  <i class="ion-pound"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+            <app-article-main *ngFor="let post of posts" [post]="post"></app-article-main>
+
+             <!-- Paginator  -->
+            <p-paginator
+            [rows]="rows"
+            [totalRecords]="totalRecords"
+            [rowsPerPageOptions]="[5, 10, 20]"
+            (onPageChange)="onPageChange($event)"
+            #paginator
+            ></p-paginator>
+        </div>
+
+          <app-category-list [categories]="categories" (categorySelected)="onCategorySelected($event)"></app-category-list>
+  
+      </div>
+    </div>
+  </div>
