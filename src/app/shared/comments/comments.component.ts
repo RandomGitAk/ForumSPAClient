@@ -47,14 +47,14 @@ export class CommentsComponent {
     }, 600000); //10 minutes
   }
   fetchComments(): void {
-    this.commentSubscription = this.commentService.getComments(this.postId).subscribe(
-        (comments : UserComment[]) => {
+    this.commentSubscription = this.commentService.getComments(this.postId).subscribe({
+        next: (comments: UserComment[]) => {
             this.comments = comments;
         },
-        (error) => {
+        error: (error) => {
             console.error('Error fetching comments:', error);
         }
-    );
+    });
   }
 
   selectCommentForReply(comment: Comment): void {
@@ -73,51 +73,52 @@ export class CommentsComponent {
         parentCommentId: this.selectedCommentId ?? null,
       };
       
-      this.commentService.addComment(`${this.baseUrl}/Comments`,newComment).subscribe(
-        (response: UserComment) => {
-          if (this.selectedCommentId) {
-            const parentComment = this.comments.find(c => c.id === this.selectedCommentId);
-            if (parentComment) {
-              parentComment.replies.push(response);
+      this.commentService.addComment(`${this.baseUrl}/Comments`, newComment).subscribe({
+        next: (response: UserComment) => {
+            if (this.selectedCommentId) {
+                const parentComment = this.comments.find(c => c.id === this.selectedCommentId);
+                if (parentComment) {
+                    parentComment.replies.push(response);
+                }
+            } else {
+                this.comments.unshift(response);
             }
-          } else {
-            this.comments.unshift(response);
-          }
-          this.form.reset();
-          this.selectedCommentId = null;
+            this.form.reset();
+            this.selectedCommentId = null;
         },
-        (error) => {
-          if (error.status === 401) {
-            this.router.navigate(['/login']);
-          }
-          console.error('Error submitting comment:', error);
+        error: (error) => {
+            if (error.status === 401) {
+                this.router.navigate(['/login']);
+            }
+            console.error('Error submitting comment:', error);
         }
-      );
+    });    
     }
   }
 
   toggleLike(comment: UserComment): void {
     const url = `${this.baseUrl}/CommentLikes/`;
+    
     if (comment.likedByUser) {
-        this.commentService.removeCommentLike(url + comment.id).subscribe(
-            () => {
+        this.commentService.removeCommentLike(url + comment.id).subscribe({
+            next: () => {
                 comment.countLikes--;
                 comment.likedByUser = false;
             },
-            (error) => {
-              console.log("error", error.status)
+            error: (error) => {
+                console.error('Error removing like:', error);
             }
-        );
+        });
     } else {
-        this.commentService.addCommentLike(url, comment.id).subscribe(
-            (response: UserComment) => {
+        this.commentService.addCommentLike(url, comment.id).subscribe({
+            next: (response: UserComment) => {
                 comment.countLikes++;
                 comment.likedByUser = true;
             },
-            (error) => {
+            error: (error) => {
                 console.error('Error adding like:', error);
             }
-        );
+        });
     }
   }
 }

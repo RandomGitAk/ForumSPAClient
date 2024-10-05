@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { PaginationParams, Role, User, Users } from '../../types';
+import { PaginationParams, User, Users } from '../../types';
 import { Observable } from 'rxjs';
 
 @Injectable({

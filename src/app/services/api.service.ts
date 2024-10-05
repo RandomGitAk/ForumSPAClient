@@ -10,21 +10,21 @@ export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
   get<T>(url: string, options: Options): Observable<T>{
-    return this.httpClient.get<T>(url, options) as Observable<T>;
+    return this.httpClient.get<T>(url, options);
   }
   
   post<T>(url: string, body: any) : Observable<T>{
-    return this.httpClient.post<T>(url, body) as Observable<T>;
+    return this.httpClient.post<T>(url, body);
   }
 
   put<T>(url: string, body: any) : Observable<T>{
-    return this.httpClient.put<T>(url, body) as Observable<T>;
+    return this.httpClient.put<T>(url, body);
   }
   patch<T>(url: string, body: any) : Observable<T>{
-    return this.httpClient.patch<T>(url, body) as Observable<T>;
+    return this.httpClient.patch<T>(url, body);
   }
 
   delete<T>(url: string): Observable<T> {
-    return this.httpClient.delete<T>(url) as Observable<T>;
+    return this.httpClient.delete<T>(url);
   }
 }

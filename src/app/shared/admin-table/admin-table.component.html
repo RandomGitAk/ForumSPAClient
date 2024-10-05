@@ -3,6 +3,7 @@
   <button *ngIf="showCreateButton" class="create-button" (click)="onCreate()">Create</button>
 </div>
 <table class="table table-striped">
+  <caption>Info</caption> 
     <thead>
       <tr>
         <th *ngFor="let col of columns">{{ col.header }}</th>

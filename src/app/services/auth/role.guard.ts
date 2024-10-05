@@ -1,15 +1,10 @@
-import { AuthService } from './auth.service'; // Імпортуйте ваш сервіс авторизації
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { inject } from '@angular/core';
+import { AuthService } from './auth.service';
+import { CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class RoleGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+export const RoleGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const authService = inject(AuthService);
+  const roles = route.data['roles'] as Array<string>;
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const roles = route.data['roles'] as Array<string>;
-    return roles ? roles.some(role => this.authService.hasRole(role)) : false;
-  }
-}
+  return roles ? roles.some(role => authService.hasRole(role)) : false;
+};

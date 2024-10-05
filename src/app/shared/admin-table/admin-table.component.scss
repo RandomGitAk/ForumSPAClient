@@ -33,6 +33,7 @@
   .table th {
     background-color: #f8f9fa;
     font-weight: 600;
+    text-align: left;
   }
   
   .table-striped tbody tr:nth-of-type(odd) {
@@ -40,10 +41,6 @@
   }
   
   .table td {
-    text-align: left;
-  }
-  
-  .table th {
     text-align: left;
   }
   

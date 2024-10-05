@@ -29,18 +29,21 @@ export class ProfilePageComponent implements OnInit {
   }
 
   loadUserProfile(): void {
-    this.userService.getMe(`${this.baseUrl}/Auth/me`).subscribe(
-      (user: User) => {
+    this.userService.getMe(`${this.baseUrl}/Auth/me`).subscribe({
+      next: (user: User) => {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.email = user.email;
-        console.log('user.lastName',user)
+        console.log('user.lastName', user);
         this.profilePicture = user.image;
       },
-      (error) => {
+      error: (error) => {
         console.error('Unable to retrieve user data', error);
+      },
+      complete: () => {
+        console.log('User profile loaded successfully');
       }
-    );
+    });
   }
 
   onFileSelected(event: any): void {
@@ -57,28 +60,28 @@ export class ProfilePageComponent implements OnInit {
 
   saveProfile(): void {
     const formData = new FormData();
-    formData.append('firstName', this.firstName || '');
-    formData.append('lastName', this.lastName || '');
+    formData.append('firstName', this.firstName ?? '');
+    formData.append('lastName', this.lastName ?? '');
 
     if (this.selectedFile) {
       formData.append('file', this.selectedFile);
     }
 
-    this.userService.updateUserInfo(`${this.baseUrl}/Users`,formData).subscribe(
-      (response) => {
+    this.userService.updateUserInfo(`${this.baseUrl}/Users`, formData).subscribe({
+      next: (response) => {
         this.messageService.add({ 
           severity: 'success', 
           summary: 'Profile Updated', 
           detail: 'Your profile has been successfully updated.' 
         });
       },
-      (error) => {
+      error: (error) => {
         this.messageService.add({ 
           severity: 'error', 
           summary: 'Update Failed', 
           detail: 'There was an error updating your profile.' 
         });
       }
-    );
+    });
   }
 }
