@@ -1,44 +1,32 @@
-# Web Application: Single-Page Application (Angular)
+Forum Application Overview
 
-In this task, you must design and develop a web application according to the requirements that are specified in the task description.
+The Forum application is a Single-Page Application (SPA) built using Angular, HTML, SCSS, and TypeScript for the front-end. It is structured to provide an interactive, user-friendly interface with essential features for a forum, such as user registration, login, posting, and moderation.
+Key Features Implemented
 
-The brief description of the technologies to use in this task is:
-* The client (front-end) application must be built on top of the Angular framework.
-* The client application must be built using HTML, CSS and TypeScript (or JavaScript).
+    User Registration & Authentication
+        Registration: Users can register with an email and password, which are validated before being stored in the system.
+        Login/Logout: Secure login and logout functionalities are provided, allowing users to access their accounts with credentials.
+        Session Management: JWT (JSON Web Token) is used for authentication and session management, ensuring secure interactions between client and server.
 
-Depending on the requirements, the task may include requirements for developing a Web API application (back-end). The back-end application code must be added to a *separate repository*.
+    User Dashboard (Personal Account)
+        Profile Information: Users have access to a personal profile page where they can update their information.
+        User’s Posts: Users can view all posts they have created, allowing them to keep track of their contributions to the forum.
 
+    Post Management
+        Add New Post: Registered users can create new posts on the forum by providing a title, content, and optional tags.
+        Post List & Details: Posts are displayed in a list format, and clicking on a post opens its detailed view.
 
-## Task Description
+    Comments on Posts
+        Commenting System: Users can comment on posts to participate in discussions.
+        View Comments: Comments are displayed beneath the respective posts, providing a thread-based interaction model.
 
-This document describes only the [non-functional requirements](https://en.wikipedia.org/wiki/Non-functional_requirement) for the application being developed. You must either develop [functional requirements](https://en.wikipedia.org/wiki/Functional_requirement) by yourself, depending on the topic received, or receive them from another source (a mentor, lecturer, or learning path).
+    Post Ratings
+        Average Rating Display: Each post displays an average rating based on user feedback.
 
-Before starting the development, put the task code you have received into the [README.md](README.md) file:
-
-TASK CODE: FORUM.
-
-
-### NodeJs
-
-The client application must target [NodeJS 18.12.0](https://nodejs.org/dist/v18.12.0) (or higher).
-
-Please, check what version of NodeJS you have installed before starting the development:
-
-```cmd
-C:\>node --version
-v18.12.0
-```
-
-
-### Git
-
-* Do all your development on the *main* branch.
-* [Do commit early and often](https://sethrobertson.github.io/GitBestPractices/).
-* [Do make useful commit messages](https://sethrobertson.github.io/GitBestPractices/).
-* You are allowed to create your own branches, but at the end, the code must be merged into the *main* branch.
-* Do not create merge requests unless asked to do so by staff.
-* The [.gitignore](.gitignore) file is added to this Git repository, which configures Git to ignore files created by the Visual Studio and compilers.
-
+    Admin Panel
+        User Management: Admins can view and manage all registered users.
+        Post Moderation: Admins have the rights to delete any posts on the forum to maintain content quality.
+        Category Moderation: Admins can edit or delete category.
 
 ### Angular
 
@@ -47,5 +35,3 @@ Install the Angular CLI:
 ```sh
 npm install -g @angular/cli
 ```
-
-The workspace and the initial started app have already been added to the repository. You are allowed to update the Angular version and replace the existing application files.
